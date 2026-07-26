@@ -1,4 +1,6 @@
-﻿namespace ContentParser.Application.Interfaces;
+﻿using ContentParser.Application.DTOs;
+
+namespace ContentParser.Application.Interfaces;
 
 public interface IContentParseService
 {
