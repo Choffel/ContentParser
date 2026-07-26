@@ -15,4 +15,8 @@
     <ProjectReference Include="..\ContentParser.Infrastructure\ContentParser.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controller\" />
+  </ItemGroup>
+
 </Project>
