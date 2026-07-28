@@ -1,5 +1,12 @@
 # Content Parser API
 
+### Wymagania
+- .NET 8 SDK lub nowszy
+
+### Przywrócenie zależności
+```bash
+dotnet restore
+```
 
 ### Uruchomienie projektu
 ```bash
@@ -21,7 +28,7 @@ Nagłówek: `Content-Type: application/json`
 Żądanie:
 ```json
 {
-  "type": "InternalJson",
+  "type": "INTERNAL_JSON",
   "content": "W3siaWQiOjEsInByb2R1Y3QiOiJMYXB0b3AiLCJwcmljZSI6MTIwMH0seyJpZCI6MiwicHJvZHVjdCI6Ik1vdXNlIiwicHJpY2UiOjUwfV0="
 }
 ```
@@ -32,22 +39,32 @@ Odpowiedź (`200 OK`):
   "processedRowsCount": 2,
   "data": [
     {
-      "id": 1,
+      "id": "1",
       "product": "Laptop",
-      "price": 1200
+      "price": "1200"
     },
     {
-      "id": 2,
+      "id": "2",
       "product": "Mouse",
-      "price": 50
+      "price": "50"
     }
   ]
 }
 ```
 
+Obsługiwane typy: `CSV`, `INTERNAL_JSON`.
+
 ---
 
-## English
+
+
+### Requirements
+- .NET 8 SDK or newer
+
+### Restore dependencies
+```bash
+dotnet restore
+```
 
 ### How to Run
 ```bash
@@ -69,7 +86,7 @@ Header: `Content-Type: application/json`
 Request:
 ```json
 {
-  "type": "InternalJson",
+  "type": "INTERNAL_JSON",
   "content": "W3siaWQiOjEsInByb2R1Y3QiOiJMYXB0b3AiLCJwcmljZSI6MTIwMH0seyJpZCI6MiwicHJvZHVjdCI6Ik1vdXNlIiwicHJpY2UiOjUwfV0="
 }
 ```
@@ -80,15 +97,17 @@ Response (`200 OK`):
   "processedRowsCount": 2,
   "data": [
     {
-      "id": 1,
+      "id": "1",
       "product": "Laptop",
-      "price": 1200
+      "price": "1200"
     },
     {
-      "id": 2,
+      "id": "2",
       "product": "Mouse",
-      "price": 50
+      "price": "50"
     }
   ]
 }
 ```
+
+Supported types: `CSV`, `INTERNAL_JSON`.
