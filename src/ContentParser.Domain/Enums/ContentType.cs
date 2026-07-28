@@ -1,7 +1,13 @@
-﻿namespace ContentParser.Domain.Enums;
+﻿using System.Text.Json.Serialization;
 
+namespace ContentParser.Domain.Enums;
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum ContentType
-{
-    Csv,
-    InternalJson
+{   
+    [JsonPropertyName("CSV")]
+    Csv = 0,
+    
+    [JsonPropertyName("INTERNAL_JSON")]
+    InternalJson = 1
 }

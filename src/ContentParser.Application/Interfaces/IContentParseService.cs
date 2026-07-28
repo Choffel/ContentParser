@@ -1,4 +1,5 @@
 ﻿using ContentParser.Application.DTOs;
+using ContentParser.Domain.Common;
 
 namespace ContentParser.Application.Interfaces;
 

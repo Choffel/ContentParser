@@ -4,5 +4,5 @@ namespace ContentParser.Application.DTOs;
 
 public record ParseContentRequestDto(
     string Content,
-    ContentType ContentType
+    ContentType Type
     );
