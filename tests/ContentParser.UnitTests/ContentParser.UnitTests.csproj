@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\ContentParser.Api\ContentParser.Api.csproj" />
     <ProjectReference Include="..\..\src\ContentParser.Domain\ContentParser.Domain.csproj" />
     <ProjectReference Include="..\..\src\ContentParser.Application\ContentParser.Application.csproj" />
     <ProjectReference Include="..\..\src\ContentParser.Infrastructure\ContentParser.Infrastructure.csproj" />
