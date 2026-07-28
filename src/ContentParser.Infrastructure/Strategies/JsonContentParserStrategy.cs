@@ -9,31 +9,40 @@ namespace ContentParser.Infrastructure.Strategies;
 public class JsonContentParserStrategy : IContentParserStrategy
 {
     public ContentType SupportedType => ContentType.InternalJson;
+
     public Result<ParsedDataResult> Parse(string rawContent)
     {
         if (string.IsNullOrWhiteSpace(rawContent))
         {
             return Result<ParsedDataResult>.Failure("JSON content cannot be empty.");
         }
-        
-        using var document = JsonDocument.Parse(rawContent);
-        var root = document.RootElement;
 
-        int processedRowsCount = 1;
-        
-        if (root.ValueKind == JsonValueKind.Array)
+        List<Dictionary<string, JsonElement>>? items;
+        try
         {
-            processedRowsCount = root.GetArrayLength();
+            items = JsonSerializer.Deserialize<List<Dictionary<string, JsonElement>>>(
+                rawContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        }
+        catch (JsonException ex)
+        {
+            return Result<ParsedDataResult>.Failure($"Invalid JSON format: {ex.Message}");
         }
 
-        var deserializedData = JsonSerializer.Deserialize<object>(rawContent);
-
-        if (deserializedData is null)
+        if (items is null || items.Count == 0)
         {
-            return Result<ParsedDataResult>.Failure("Failed to deserialize JSON content.");
+            return Result<ParsedDataResult>.Failure("JSON array is empty or null.");
         }
 
-        var result = new ParsedDataResult(processedRowsCount, deserializedData);
-        return Result<ParsedDataResult>.Success(result);
+        var rows = items.Select(item =>
+        {
+            var row = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var kvp in item)
+            {
+                row[kvp.Key] = kvp.Value.ToString();
+            }
+            return row;
+        }).ToList();
+
+        return Result<ParsedDataResult>.Success(new ParsedDataResult(rows.Count, rows));
     }
 }
