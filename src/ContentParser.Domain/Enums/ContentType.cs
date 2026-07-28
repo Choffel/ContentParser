@@ -6,5 +6,7 @@ namespace ContentParser.Domain.Enums;
 public enum ContentType
 {   
     Csv = 0,
+    
+    [JsonStringEnumMemberName("INTERNAL_JSON")]
     InternalJson = 1
 }
